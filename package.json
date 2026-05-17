@@ -31,7 +31,9 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "measure:build": "node scripts/measure-build.mjs",
+    "measure:lighthouse": "node scripts/measure-lighthouse.mjs"
   },
   "eslintConfig": {
     "extends": [

@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import type { FC, ReactNode } from 'react'
 import { MenuItemWrapper } from './style'
 import { formatCount, getImageSize } from '@/utils/format'
+import { useRenderCount } from '@/utils/dev-render-count'
 
 interface Iprops {
   children?: ReactNode
@@ -10,6 +11,7 @@ interface Iprops {
 
 const SongMenuItem: FC<Iprops> = (props) => {
   const { itemData } = props
+  useRenderCount('SongMenuItem')
 
   return (
     <MenuItemWrapper>

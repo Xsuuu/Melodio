@@ -5,12 +5,14 @@ import AreaHeaderV1 from '@/components/area-header-v1'
 import { useAppSelector } from '@/store'
 import SongMenuItem from '@/components/song-menu-item'
 import { shallowEqual } from 'react-redux'
+import { useRenderCount } from '@/utils/dev-render-count'
 
 interface IProps {
   children?: ReactNode
 }
 
 const HotRecommend: FC<IProps> = () => {
+  useRenderCount('HotRecommend')
   const { hotRecommends } = useAppSelector(
     (state) => ({
       hotRecommends: state.recommend.hotRecommends
