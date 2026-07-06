@@ -39,7 +39,7 @@ scripts/
 **/lighthouse*.json
 
 # 忽略特定路径 service/config/ 下的 index.ts 文件
-service/config/
+service/config/index.ts
 
 /src/reportWebVitals.ts
 
@@ -49,3 +49,5 @@ service/config/
 
 # 忽略所有以 -backup 结尾的无后缀名文件或文件夹（如 config-backup, logs-backup/）
 *-backup
+src/service/config/index.ts
+src/views/discover/c-views/recommend/index-backup.tsx

@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
-import 'normalize.css'
 import { ThemeProvider } from 'styled-components'
 
 import './assets/css/index.less'
