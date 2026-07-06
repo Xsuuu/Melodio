@@ -29,25 +29,8 @@ yarn-error.log*
 .env.development
 .env.production
 
-# 忽略任何目录下的 docs 文件夹及其内容
-docs/
-
 # 忽略任何目录下的 script 文件夹及其内容
 scripts/
 
 # 忽略任何目录下以 lighthouse 开头的 json 文件
 **/lighthouse*.json
-
-# 忽略特定路径 service/config/ 下的 index.ts 文件
-service/config/index.ts
-
-/src/reportWebVitals.ts
-
-
-# 忽略所有以 -backup 结尾且带有任意后缀名的文件（如 app-backup.js, data-backup.json）
-*-backup.*
-
-# 忽略所有以 -backup 结尾的无后缀名文件或文件夹（如 config-backup, logs-backup/）
-*-backup
-src/service/config/index.ts
-src/views/discover/c-views/recommend/index-backup.tsx
