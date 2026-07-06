@@ -59,4 +59,4 @@
 //   )
 // }
 
-// export default memo(Recommend)
+// export default Recommend
