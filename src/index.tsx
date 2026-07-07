@@ -9,6 +9,7 @@ import './assets/css/index.less'
 import App from '@/App'
 import store from './store'
 import theme from './assets/theme'
+import reportWebVitals from './reportWebVitals'
 
 //@指的是src的别名
 //因为react是基于webpack，webpack的配置是隐藏的，有两种方式：
@@ -36,3 +37,9 @@ root.render(
     </ThemeProvider>
   </Provider>
 )
+
+reportWebVitals((metric) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[web-vitals] ${metric.name}:`, Math.round(metric.value))
+  }
+})

@@ -1,5 +1,7 @@
-import { useAppDispatch } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { Skeleton } from 'antd'
 import React, { memo, useEffect } from 'react'
+import { shallowEqual } from 'react-redux'
 import type { FC, ReactNode } from 'react'
 import {
   fetchRankingDataAction,
@@ -22,8 +24,16 @@ interface Iprops {
 }
 
 const Recommend: FC<Iprops> = () => {
-  // 发起action，获取数据
   const dispatch = useAppDispatch()
+  const { banners, hotRecommends } = useAppSelector(
+    (state) => ({
+      banners: state.recommend.banners,
+      hotRecommends: state.recommend.hotRecommends
+    }),
+    shallowEqual
+  )
+  const isPageLoading = banners.length === 0 && hotRecommends.length === 0
+
   useEffect(() => {
     // dispatch(fetchBannerDataAction())
     // dispatch(fetchHotRecommendAction())
@@ -32,7 +42,14 @@ const Recommend: FC<Iprops> = () => {
     dispatch(fetchRankingDataAction())
   }, [])
 
-  //render函数的返回jsx
+  if (isPageLoading) {
+    return (
+      <RecommendWrapper>
+        <Skeleton active paragraph={{ rows: 16 }} />
+      </RecommendWrapper>
+    )
+  }
+
   return (
     <RecommendWrapper>
       <TopBanner />

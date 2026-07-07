@@ -5,6 +5,7 @@ import { useAppSelector } from '@/store'
 import { shallowEqual } from 'react-redux'
 import classNames from 'classnames'
 
+import { preloadImage } from '@/utils/preload-image'
 import { BannerControl, BannerLeft, BannerRight, BannerWrapper } from './style'
 
 interface Iprops {
@@ -22,19 +23,59 @@ const TopBanner: FC<Iprops> = () => {
   )
 
   const [imageIndex, setImageIndex] = useState(0)
+  const [bgUrl, setBgUrl] = useState('')
+  const [bgReady, setBgReady] = useState(false)
 
   function handleBeforeChange(current: number, next: number) {
     setImageIndex(next)
   }
-  let backGroundUrl = banners?.[imageIndex]?.imageUrl
-  if (backGroundUrl) {
-    backGroundUrl = backGroundUrl + '?imageView&blur=40x20'
-  }
+
+  useEffect(() => {
+    const rawUrl = banners?.[imageIndex]?.imageUrl
+    if (!rawUrl) {
+      setBgUrl('')
+      setBgReady(false)
+      return
+    }
+
+    // 基线模式：Lighthouse 对比用，见 docs/LIGHTHOUSE_GUIDE.md
+    const isBaseline = process.env.REACT_APP_BANNER_BASELINE === 'true'
+    if (isBaseline) {
+      setBgUrl(rawUrl)
+      setBgReady(true)
+      return
+    }
+
+    const blurredUrl = rawUrl + '?imageView&blur=40x20'
+    setBgReady(false)
+    setBgUrl(blurredUrl)
+
+    let cancelled = false
+    preloadImage(blurredUrl)
+      .then(() => {
+        if (cancelled) return
+        setBgReady(true)
+        return preloadImage(rawUrl)
+      })
+      .then((hqUrl) => {
+        if (!cancelled && hqUrl) setBgUrl(hqUrl)
+      })
+      .catch(() => {
+        if (!cancelled) setBgReady(true)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [banners, imageIndex])
 
   return (
     <BannerWrapper
+      className={bgReady ? 'bg-ready' : 'bg-loading'}
       style={{
-        background: `url('${backGroundUrl}') center center / 6000px`
+        backgroundImage: bgUrl ? `url('${bgUrl}')` : undefined,
+        backgroundPosition: 'center center',
+        backgroundSize: '6000px'
       }}
     >
       <div className="banner wrap-v2">

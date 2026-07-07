@@ -1,22 +1,17 @@
+// 1. 手动切换
+export const BASE_URL = process.env.REACT_APP_BASE_URL
+
+export const TIME_OUT = 10000
+
+// 2. 依赖当前环境: development/production
+// console.log(process.env.NODE_ENV)
 // let BASE_URL = ''
-// export const BASE_URL = 'https://zm.wwoyun.cn/'
-// export const BASE_URL = 'https://nmusic.nxcloud.club:13140/'
-// export const BASE_URL = 'https://ncm.zhenxin.me/'
-// export const BASE_URL = 'https://music.mcseekeri.com/'
-export const BASE_URL = 'https://ncme.zhenxin.me/'
-
-export const TIME_OUT = 20000
-
-//在react中如何区分开发环境和生产环境地址
-//1.手动切换(手动注释，危险)
-//2. 依赖于当前的环境：development/production
 // if (process.env.NODE_ENV === 'development') {
-//   BASE_URL = 'https://ncme.zhenxin.me/'
-//   console.log('development')
+//    BASE_URL = 'http://codercba.dev:9002'
 // } else {
-//   BASE_URL = 'https://ncme.zhenxin.me/'
-//   console.log('production')
+//    BASE_URL = 'http://codercba.prod:9002'
 // }
-
 // export { BASE_URL }
-//3.创建.env.development和.env.production
+
+// 3. 从定义的环境变量的配置文件中，加载变量
+// console.log(process.env.REACT_APP_BASE_URL)

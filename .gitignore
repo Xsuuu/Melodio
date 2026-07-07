@@ -10,6 +10,8 @@
 
 # production
 /build
+/build-lazy
+/build-lazy-measured
 
 # misc
 .DS_Store
@@ -26,3 +28,9 @@ yarn-error.log*
 .env.local
 .env.development
 .env.production
+
+# 忽略任何目录下的 script 文件夹及其内容
+scripts/
+
+# 忽略任何目录下以 lighthouse 开头的 json 文件
+**/lighthouse*.json
