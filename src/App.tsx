@@ -7,6 +7,7 @@ import AppFooter from './components/app-footer'
 import AppPlayerBar from './views/player/app-player-bar'
 import { useAppDispatch } from './store'
 import { fetchCurrentSongAction } from './views/player/store/player'
+import ChatbotIcon from './components/chatbot-icon'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -15,6 +16,7 @@ function App() {
   })
   return (
     <div className="App">
+      <ChatbotIcon />
       <AppHeader />
       <Suspense fallback="">
         <div className="main">{useRoutes(routes)}</div>
